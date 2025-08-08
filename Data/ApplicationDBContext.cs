@@ -12,7 +12,7 @@ namespace MyProject.Data
 
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<Product> Product { get; set; }
-        public DbSet<Customer> Customers { get; set; }  // Tambahkan ini
+        public DbSet<Customer> Customers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,7 +25,7 @@ namespace MyProject.Data
             .Property(p => p.Id)
             .HasDefaultValueSql("gen_random_uuid()");
 
-            modelBuilder.Entity<Customer>()  // Tambahkan ini
+            modelBuilder.Entity<Customer>()
                 .Property(p => p.Id)
                 .HasDefaultValueSql("gen_random_uuid()");
         }

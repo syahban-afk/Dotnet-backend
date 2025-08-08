@@ -22,11 +22,41 @@ namespace MyProject.Controllers
 
         // GET: api/Product
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetAll()
+        public async Task<IActionResult> GetProducts(
+    [FromQuery] int page = 1,
+    [FromQuery] int pageSize = 10)
         {
-            return await _context.Product
-                .Include(p => p.Category) // include relasi category
-                .ToListAsync();
+            // Cek apakah user ingin pagination atau semua data
+            // Jika page dan pageSize adalah 0 atau nilai default lainnya, asumsikan ingin semua data
+            bool isPaginationEnabled = page > 0 && pageSize > 0;
+
+            IQueryable<Product> query = _context.Product.Include(p => p.Category);
+
+            // Jika pagination diaktifkan
+            if (isPaginationEnabled)
+            {
+                var skipCount = (page - 1) * pageSize;
+                var products = await query
+                    .Skip(skipCount)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+                var totalCount = await _context.Product.CountAsync();
+
+                var response = new
+                {
+                    TotalCount = totalCount,
+                    Page = page,
+                    PageSize = pageSize,
+                    Data = products
+                };
+                return Ok(response);
+            }
+            else // Jika tidak ada parameter pagination, kembalikan semua data
+            {
+                var allProducts = await query.ToListAsync();
+                return Ok(allProducts);
+            }
         }
 
         // GET: api/Product/{id}
@@ -47,21 +77,49 @@ namespace MyProject.Controllers
 
         // POST: api/Product
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Product product)
+        public async Task<IActionResult> Create([FromForm] Product product, IFormFile? image)
         {
+            // Cek validasi model
             if (!ModelState.IsValid)
+            {
                 return BadRequest(ModelState);
+            }
 
-            // Verifikasi bahwa CategoryId valid
+            // Verifikasi CategoryId
             var category = await _context.ProductCategories.FindAsync(product.CategoryId);
             if (category == null)
             {
                 return BadRequest(new { Error = "The Category field is required.", Message = $"Category with ID {product.CategoryId} not found." });
             }
 
+            // Jika ada file gambar di-upload
+            if (image != null && image.Length > 0)
+            {
+                // 1. Simpan gambar ke folder wwwroot
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
+                var filePath = Path.Combine("wwwroot", "images", fileName);
+
+                // Pastikan direktori ada
+                var directory = Path.GetDirectoryName(filePath);
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await image.CopyToAsync(stream);
+                }
+
+                // 2. Simpan path gambar di model
+                product.ImageUrl = "/images/" + fileName;
+            }
+            // Jika tidak ada gambar, ImageUrl akan tetap null (jika kamu set nullable)
+
             // Set Category property
             product.Category = category;
 
+            // Tambahkan produk ke database
             _context.Product.Add(product);
             await _context.SaveChangesAsync();
 
@@ -71,10 +129,9 @@ namespace MyProject.Controllers
                 new { Message = "Product successfully created.", Data = product }
             );
         }
-
         // PUT: api/Product/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] Product updated)
+        public async Task<IActionResult> Update(Guid id, [FromBody] Product updated, IFormFile? image = null)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -91,6 +148,32 @@ namespace MyProject.Controllers
             existing.Qty = updated.Qty;
             existing.Description = updated.Description;
             existing.CategoryId = updated.CategoryId;
+
+            // Cek apakah ada file gambar baru yang diunggah
+            if (image != null && image.Length > 0)
+            {
+                // Hapus gambar lama jika ada
+                if (!string.IsNullOrEmpty(existing.ImageUrl))
+                {
+                    var oldFilePath = Path.Combine("wwwroot", existing.ImageUrl.TrimStart('/'));
+                    if (System.IO.File.Exists(oldFilePath))
+                    {
+                        System.IO.File.Delete(oldFilePath);
+                    }
+                }
+
+                // Simpan gambar baru
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
+                var filePath = Path.Combine("wwwroot", "images", fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await image.CopyToAsync(stream);
+                }
+
+                // Simpan path gambar baru ke model
+                existing.ImageUrl = "/images/" + fileName;
+            }
 
             await _context.SaveChangesAsync();
 

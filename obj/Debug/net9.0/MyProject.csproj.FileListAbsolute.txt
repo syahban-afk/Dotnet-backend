@@ -140,3 +140,5 @@ C:\Users\LAPTOP-PKL16\Documents\SYZ-PKL-COBA\learn-dotnet\MyProject\bin\Debug\ne
 C:\Users\LAPTOP-PKL16\Documents\SYZ-PKL-COBA\learn-dotnet\MyProject\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\LAPTOP-PKL16\Documents\SYZ-PKL-COBA\learn-dotnet\MyProject\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\LAPTOP-PKL16\Documents\SYZ-PKL-COBA\learn-dotnet\MyProject\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\LAPTOP-PKL16\Documents\SYZ-PKL-COBA\learn-dotnet\MyProject\obj\Debug\net9.0\MyProject.sourcelink.json
+C:\Users\LAPTOP-PKL16\Documents\SYZ-PKL-COBA\learn-dotnet\MyProject\bin\Debug\net9.0\MyProject.staticwebassets.runtime.json
