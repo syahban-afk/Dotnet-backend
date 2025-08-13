@@ -8,7 +8,6 @@ using MyProject.Models;
 
 namespace MyProject.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -131,7 +130,7 @@ namespace MyProject.Controllers
         }
         // PUT: api/Product/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] Product updated, IFormFile? image = null)
+        public async Task<IActionResult> Update(Guid id, [FromForm] Product updated, IFormFile? image = null)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

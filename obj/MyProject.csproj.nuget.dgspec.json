@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LAPTOP-PKL16\\Documents\\SYZ-PKL-COBA\\learn-dotnet\\MyProject\\MyProject.csproj": {}
+    "C:\\Users\\LAPTOP-PKL16\\Documents\\SYZ-PKL-COBA\\learn-dotnet\\myproject\\MyProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LAPTOP-PKL16\\Documents\\SYZ-PKL-COBA\\learn-dotnet\\MyProject\\MyProject.csproj": {
+    "C:\\Users\\LAPTOP-PKL16\\Documents\\SYZ-PKL-COBA\\learn-dotnet\\myproject\\MyProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LAPTOP-PKL16\\Documents\\SYZ-PKL-COBA\\learn-dotnet\\MyProject\\MyProject.csproj",
+        "projectUniqueName": "C:\\Users\\LAPTOP-PKL16\\Documents\\SYZ-PKL-COBA\\learn-dotnet\\myproject\\MyProject.csproj",
         "projectName": "MyProject",
-        "projectPath": "C:\\Users\\LAPTOP-PKL16\\Documents\\SYZ-PKL-COBA\\learn-dotnet\\MyProject\\MyProject.csproj",
+        "projectPath": "C:\\Users\\LAPTOP-PKL16\\Documents\\SYZ-PKL-COBA\\learn-dotnet\\myproject\\MyProject.csproj",
         "packagesPath": "C:\\Users\\LAPTOP-PKL16\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LAPTOP-PKL16\\Documents\\SYZ-PKL-COBA\\learn-dotnet\\MyProject\\obj\\",
+        "outputPath": "C:\\Users\\LAPTOP-PKL16\\Documents\\SYZ-PKL-COBA\\learn-dotnet\\myproject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

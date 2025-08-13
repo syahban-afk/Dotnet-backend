@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cr0HTXBnZoA=",
+  "dgSpecHash": "8nB5zuCh6DY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\LAPTOP-PKL16\\Documents\\SYZ-PKL-COBA\\learn-dotnet\\MyProject\\MyProject.csproj",
+  "projectFilePath": "C:\\Users\\LAPTOP-PKL16\\Documents\\SYZ-PKL-COBA\\learn-dotnet\\myproject\\MyProject.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\LAPTOP-PKL16\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\LAPTOP-PKL16\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

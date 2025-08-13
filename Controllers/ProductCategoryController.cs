@@ -8,7 +8,6 @@ using MyProject.Models;
 
 namespace MyProject.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductCategoryController : ControllerBase
